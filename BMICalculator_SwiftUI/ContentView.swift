@@ -6,19 +6,21 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
+    @State var weight = ""
+    @State var height = ""
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Weight")
+            TextField("Enter weight", text: $weight).textFieldStyle(.roundedBorder)
+            
+            Text("Height")
+            TextField("Enter height", text: $height).textFieldStyle(.roundedBorder)
         }
         .padding()
     }
 }
-
 #Preview {
     ContentView()
 }
