@@ -16,30 +16,46 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             
-            Text("BMI Calculator")
-                .font(.largeTitle.bold())
-                .padding(.bottom, 20)
+            HStack {
+                Spacer()
+                Text("BMI Calculator")
+                    .font(.largeTitle.bold())
+                Spacer()
+            }
+            .padding(.bottom, 20)
             
                 Text("Weight (kg)")
                 TextField("Enter weight", text: $weight)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
                 
-                Text("Height (m)")
+                Text("Height (cm)")
                 TextField("Enter height", text: $height)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
             
-            Button("Calculate BMI") {
-                calculateBMI()
+            HStack {
+                Spacer()
+                
+                Button("Calculate BMI") {
+                    calculateBMI()
+                }
+                .font(.title3.bold())    // <- changed font
+                .buttonStyle(.borderedProminent)
+                
+                Spacer()
             }
+            .padding(.top, 70)
             .buttonStyle(.borderedProminent)
-            .padding(.top, 10)
             
             if !bmiResult.isEmpty {
-                Text("Your BMI: \(bmiResult)")
-                    .font(.title3)
-                    .padding(.top, 20)
+                HStack {
+                    Spacer()
+                    Text("Your BMI: \(bmiResult)")
+                        .font(.title3)
+                    Spacer()
+                }
+                .padding(.top, 100)
             }
             
             Spacer()
@@ -55,8 +71,10 @@ struct ContentView: View {
             return
         }
         
-        let bmi = w / (h * h)
-        bmiResult = String(format: "%.2f", bmi)
+        let h_cm = h/100
+        
+        let bmi = w / (h_cm * h_cm)
+        bmiResult = String(format: "%.1f", bmi)
     }
 }
 
